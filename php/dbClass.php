@@ -38,26 +38,19 @@ class DBConnection
 		Принимает на вход таблицу, тип операции, id строки с которой производятся манипуляции, типы значений в виде строки (напр. "sssi"), поля таблицы и значения этих полей
 		первые два параметра являются обязательными, остальные являются параметрами по умолчанию (http://php.net/manual/ru/functions.arguments.php), по умолчанию во всех параметрах по умолчанию пустая строка
 	*/
-	public function makePreparedQuery($table, $operationType, $rowId = "", $valuesTypes = "", $fields = "", $values = "")
-	{
-		// $placeholders = []; //создаём массив, где будем хранить знаки вопроса, количество которых зависит от количества полей (смотрите статью про то, как выглядит подготовленный запрос)
-		// for ($i=0; $i < sizeof($fields); $i++) //цикл для записи знаков вопроса в $placeholders
-		// { 
-		// 	array_push($placeholders, '?');
-		// }
-		// $impPlaceholders = implode(",", $placeholders); //формируем строку из знаков вопроса разделённых запятой
-		// $impFields = implode(",", $fields); //формируем строку из полей разделённых запятой
-		// $impValues = implode(",", $placeholders); //формируем строку из значений полей разделённых запятой
-		// // далее в зависимост ) {
+	public function makePreparedQuery($table, $operationType, $rowId = "", $valuesTypes = "", $fields = "", $values = "") {
+
 		if ($operationType == 'insert' && $table == 'pharmacy'){
-				$query = "INSERT INTO `pharmacy`(`id_pharmacy`, `title`, `average_rating_by_pharmacy`, `search_by_pharmacy`) VALUES (NULL, '$values[1]', '$values[2]', 'NULL')";
-				$stmt = $this->conn->prepare($query); //подготавливается запроc
-				$stmt->execute();
+			var_dump($table);
+			$query = "INSERT INTO `pharmacy`(`id_pharmacy`, `title`, `average_rating_by_pharmacy`, `search_by_pharmacy`) VALUES (NULL, '$values[1]', '$values[2]', 'NULL')";
+			$stmt = $this->conn->prepare($query); //подготавливается запроc
+			$stmt->execute();
 		} else if ($operationType == 'insert' && $table == "medicine") {
+			var_dump($table);
 			$query = "INSERT INTO `medicine`(`id_medicine`, `title`, `cost`, `available_in_warehouse`, `amount`, `average_rating_by_medicine`, `search_by_medicine`) 
 			VALUES (NULL, '$values[1]', '$values[2]', '$values[3]', '$values[4]', '$values[5]', 'NULL')";
-				$stmt = $this->conn->prepare($query); //подготавливается запроc
-				$stmt->execute();
+			$stmt = $this->conn->prepare($query); //подготавливается запроc
+			$stmt->execute();
 		}
 
 		if ($operationType == 'update' && $table == 'pharmacy') {
@@ -94,15 +87,17 @@ class DBConnection
 
 
 			$query = "UPDATE `medicine` SET `id_medicine`='$id',`title`='$title',`cost`='$cost',`available_in_warehouse`='$available', `amount`='$amount', 
-			`average_rating_by_medicine`='$average_rating_by_medicine', `search_by_medicine`='NULL' WHERE `id_medicine`='$rowId'";
+			`average_rating_by_medicine`='$rating', `search_by_medicine`='NULL' WHERE `id_medicine`='$rowId'";
 			$stmt = $this->conn->prepare($query); //запрос подготавливается после того, как был сформирован
 			$stmt->execute();
 		}
 
 		if ($operationType == 'delete' && $table == 'pharmacy') { 
+			var_dump($table);
 			$stmt = $this->conn->query("DELETE FROM `pharmacy` WHERE `id_pharmacy` = '$rowId'");
 			$stmt->execute();
 		} else if ($operationType == 'delete' && $table == 'medicine') {
+			var_dump($table);
 			$stmt = $this->conn->query("DELETE FROM `medicine` WHERE `id_medicine` = '$rowId'");
 			$stmt->execute();
 		}

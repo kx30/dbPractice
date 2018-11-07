@@ -1,7 +1,8 @@
-$(document).ready(function(){
+$(document).ready(function() {
 
 	let isCheck = false;
 	let mainContainerIsHidden = false;
+
 	$("input").attr("disabled", true);
 	$(".hidden-container").find("input").removeAttr("disabled");
 
@@ -27,7 +28,7 @@ $(document).ready(function(){
 		let values = [];
 		let types = "";
 		let action = 'insert';
-		let table = 'medicine';
+		let table = checkTable();
 		inputs.each(function() {
 			fields.push($(this).attr('name'));
 			values.push($(this).val());
@@ -62,7 +63,7 @@ $(document).ready(function(){
 			let fields = [];
 			let types = "";
 			let action = 'update';
-			let table = 'medicine';
+			let table = checkTable();
 			let id = $(this).parents(".input-container").find(".id_input").val();
 			inputs.each(function() {
 				fields.push($(this).attr('name'));
@@ -82,7 +83,7 @@ $(document).ready(function(){
 				},
 				success: function(response) {
 					console.log(response);	
-					//location.reload();
+					location.reload();
 				},
 				error: function(error) {
 					console.log(error);
@@ -120,9 +121,9 @@ $(document).ready(function(){
 			let fields = [];
 			let types = "";
 			let action = 'delete';
-			let table = 'medicine';
+			let table = checkTable();
 			let id = $(this).parents(".input-container").find(".id_input").val();
-			console.log(id);
+			console.log(checkTable());
 			inputs.each(function() {
 				fields.push($(this).attr('name'));
 				values.push($(this).val());
@@ -141,7 +142,7 @@ $(document).ready(function(){
 				},
 				success: function(response) {
 					console.log(response);	
-					//location.reload();
+					location.reload();
 				},
 				error: function(error) {
 					console.log(error);
@@ -156,6 +157,14 @@ $(document).ready(function(){
 			$(this).parents(".input-container").find(".fa-check").show();	
 		}
 	});
+
+	function checkTable() {
+		if ($("body").is("#medicine-body")) {
+			return "medicine";
+		} else {
+			return "pharmacy";
+		}
+	}
 
 	function replaceShow() {
 		$(".fa-trash").show();
