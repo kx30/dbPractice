@@ -44,9 +44,9 @@
 			<div class="row">
 				<div class="col-10">					
 					<div  class="row p-2" >
-						<div class="col-1 ml-2">ID</div>
-						<div class="col-2 ml-2">Title</div>
-						<div class="col-2 ml-2">Rating</div>
+						<div class="col-1 ml-2" data-type='i' name='id_pharmacy'>ID</div>
+						<div class="col-2 ml-2" data-type='s' name='title'>Title</div>
+						<div class="col-2 ml-2" data-type='d' name='average_rating_by_pharmacy'>Rating</div>
 					</div>
 				</div>
 				<div class="col-2">
@@ -84,9 +84,9 @@
                   	echo "
                   	<div class='row pt-3 input-container'> 
 	                  	<div class='col-10'>
-							<input class='item col-1 ml-2 id_input' type='text' placeholder='ID' value='{$data[$i]['id_pharmacy']}'>
-							<input class='item col-2 ml-2' type='text' placeholder='Title' value='{$data[$i]['title']}'>
-							<input class='item col-2 ml-2' type='text' placeholder='Rating' value='{$data[$i]['average_rating_by_pharmacy']}'>
+							<input class='item col-1 ml-2 id_input' data-type='i' name='id_pharmacy' type='text' placeholder='ID' value='{$data[$i]['id_pharmacy']}'>
+							<input class='item col-2 ml-2' data-type='s' name='title' type='text' placeholder='Title' value='{$data[$i]['title']}'>
+							<input class='item col-2 ml-2' data-type='d' name='average_rating_by_pharmacy' type='text' placeholder='Rating' value='{$data[$i]['average_rating_by_pharmacy']}'>
 						</div>
 						<div class='col-1'>
 							<button id='editButton' type='button' class='btn-sm btn-primary'>
@@ -112,18 +112,15 @@
 	<div class="hidden-container p-5">
 		<form>
 		<div class="form-group">
-			<input type="number" class="form-control" placeholder="ID">
+			<input class="form-control" data-type='s' name='title' placeholder="Title">
 		</div>
 		<div class="form-group">
-			<input class="form-control" placeholder="Title">
-		</div>
-		<div class="form-group">
-			<input type="number" class="form-control" placeholder="Rating">
+			<input type="number" data-type='d' name='average_rating_by_pharmacy' class="form-control" placeholder="Rating">
 		</div>
 		<div class="row">
 			<div class="col-8"></div>
 			<div class="col-2">
-				<button id="acceptButton" type="button" class="btn btn-primary">Accept</button>
+				<button id="acceptButton"  type="button" class="btn btn-primary">Accept</button>
 			</div>
 			<div class="col-2">
 				<button id="cancelButton" type="button" class="btn btn-primary">Cancel</button>

@@ -83,7 +83,7 @@ $(document).ready(function() {
 				},
 				success: function(response) {
 					console.log(response);	
-					location.reload();
+					//location.reload();
 				},
 				error: function(error) {
 					console.log(error);
@@ -123,7 +123,8 @@ $(document).ready(function() {
 			let action = 'delete';
 			let table = checkTable();
 			let id = $(this).parents(".input-container").find(".id_input").val();
-			console.log(checkTable());
+			let id_table = checkIdTable();
+			console.log(id_table);
 			inputs.each(function() {
 				fields.push($(this).attr('name'));
 				values.push($(this).val());
@@ -136,13 +137,14 @@ $(document).ready(function() {
 					table: table,
 					action: action,
 					id: id,
+					id_table: id_table,
 					fields: JSON.stringify(fields),
 					values: JSON.stringify(values),
 					types: types,
 				},
 				success: function(response) {
 					console.log(response);	
-					location.reload();
+					//location.reload();
 				},
 				error: function(error) {
 					console.log(error);
@@ -163,6 +165,14 @@ $(document).ready(function() {
 			return "medicine";
 		} else {
 			return "pharmacy";
+		}
+	}
+
+	function checkIdTable() {
+		if ($("body").is("#medicine-body")) {
+			return "id_medicine";
+		} else {
+			return "id_pharmacy";
 		}
 	}
 
